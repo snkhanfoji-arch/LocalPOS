@@ -5,30 +5,25 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       flutter: stable
-      groups:
-        - keystore_credentials
     triggering:
       events:
         - push
-        - pull_request
       branch_patterns:
         - pattern: 'main'
           include: true
     scripts:
-      - name: Clean build elements
-        script: |
-          flutter clean
-      - name: Get dependencies
-        script: |
-          flutter pub get
+      - name: Clean
+        script: flutter clean
+      - name: Get packages  
+        script: flutter pub get
       - name: Build APK
-        script: |
-          flutter build apk --release --no-tree-shake-icons
+        script: flutter build apk --release --no-tree-shake-icons
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
     publishing:
       email:
         recipients:
           - snkhanfoji@gmail.com
-        on_success: true
-        on_failure: true
+        notify:
+          success: true
+          failure: true
