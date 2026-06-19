@@ -18,10 +18,10 @@ workflows:
       - name: Clean build elements
         script: |
           flutter clean
-      - name: Fetch stable dependencies
+      - name: Get dependencies
         script: |
           flutter pub get
-      - name: Compile production release APK
+      - name: Build APK
         script: |
           flutter build apk --release --no-tree-shake-icons
     artifacts:
@@ -29,5 +29,6 @@ workflows:
     publishing:
       email:
         recipients:
-          - justher.lifestyle@gmail.com
-        on_failure: false
+          - snkhanfoji@gmail.com
+        on_success: true
+        on_failure: true
